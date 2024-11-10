@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="Davide & Modupe's Wedding">
+	<Hero />
+	
+	<Section 
+		id="london" 
+		titleEn="Traditional Yoruba Engagement"
+		titleIt="Fidanzamento Tradizionale Yoruba"
+		className="bg-light"
+	>
+		<div class="ceremony-grid">
+			<Card 
+				titleEn="Traditional Engagement Ceremony"
+				titleIt="Cerimonia di Fidanzamento Tradizionale"
+				date="September 6th, 2025"
+				image="https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg"
+			>
+				<p data-en="Join us for a beautiful celebration of Yoruba culture and tradition" data-it="Unitevi a noi per una meravigliosa celebrazione della cultura e tradizione Yoruba"></p>
+				<p>London, United Kingdom</p>
+				<p class="highlight" data-en="Exact venue details to be announced" data-it="I dettagli della location saranno annunciati"></p>
+			</Card>
+		</div>
+	</Section>
+
+	<Section 
+		id="italy" 
+		titleEn="Wedding in Sicily"
+		titleIt="Matrimonio in Sicilia"
+	>
+		<div class="ceremony-grid">
+			<Card 
+				titleEn="Wedding Ceremony"
+				titleIt="Cerimonia Nuziale"
+				date="September 11th, 2025 - Time TBA"
+				image="https://upload.wikimedia.org/wikipedia/commons/e/ef/Cathedral_of_Mazara_-_front_portal.jpg"
+			>
+				<p>Cattedrale del Santissimo Salvatore</p>
+				<p>Mazara del Vallo</p>
+				<p>Sicily, Italy</p>
+				<p class="note" data-en="This historic 11th-century cathedral will provide a magnificent backdrop for our ceremony" data-it="Questa storica cattedrale dell'XI secolo farà da magnifica cornice alla nostra cerimonia"></p>
+			</Card>
+			<Card 
+				titleEn="Reception"
+				titleIt="Ricevimento"
+				image="https://www.bagliooneto.it/baglio-oneto.jpg"
+			>
+				<p>Baglio Oneto dei Principi di San Lorenzo</p>
+				<p>Contrada Baronazzo Amafi, 8</p>
+				<p>91025 Marsala TP, Italy</p>
+				<p class="note" data-en="Join us for an evening of fine dining, wine, and dancing under the Sicilian stars" data-it="Unitevi a noi per una serata di ottimo cibo, vino e balli sotto le stelle siciliane"></p>
+			</Card>
+		</div>
+	</Section>
+
+	<Section 
+		id="travel" 
+		titleEn="How to Get There"
+		titleIt="Come Arrivare"
+		className="bg-light"
+	>
+		<div class="travel-info">
+			<Card 
+				titleEn="Travel to Sicily"
+				titleIt="Viaggio in Sicilia"
+				image="https://images.pexels.com/photos/7522/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+			>
+				<div class="travel-details">
+					<h4 data-en="Nearest Airport" data-it="Aeroporto più vicino"></h4>
+					<p>Palermo Airport (PMO)</p>
+					<p>90045 Cinisi, Metropolitan City of Palermo, Italy</p>
+					
+					<h4 class="mt-4" data-en="Getting to the Venues" data-it="Raggiungere le Location"></h4>
+					<p data-en="From Palermo Airport to Mazara del Vallo (Cathedral):" data-it="Dall'aeroporto di Palermo a Mazara del Vallo (Cattedrale):"></p>
+					<ul>
+						<li data-en="By car: approximately 1 hour 30 minutes drive" data-it="In auto: circa 1 ora e 30 minuti di viaggio"></li>
+						<li data-en="We recommend renting a car or arranging private transfer" data-it="Consigliamo di noleggiare un'auto o prenotare un transfer privato"></li>
+					</ul>
+
+					<p class="mt-2" data-en="From Cathedral to Baglio Oneto (Reception):" data-it="Dalla Cattedrale al Baglio Oneto (Ricevimento):"></p>
+					<ul>
+						<li data-en="30 minutes drive" data-it="30 minuti di auto"></li>
+					</ul>
+
+					<p class="note mt-4" data-en="Transportation details and arrangements will be provided closer to the date" data-it="I dettagli sul trasporto e gli arrangiamenti saranno forniti in prossimità della data"></p>
+				</div>
+			</Card>
+		</div>
+	</Section>
+</Layout>
+
+<style>
+	.ceremony-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+	.travel-info {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	.travel-details h4 {
+		font-family: 'Cormorant Garamond', serif;
+		font-size: 1.2rem;
+		margin-bottom: 0.5rem;
+		color: #9c6f3f;
+	}
+	.travel-details ul {
+		list-style-type: disc;
+		margin-left: 1.5rem;
+		margin-bottom: 1rem;
+	}
+	.note {
+		margin-top: 1rem;
+		font-style: italic;
+		font-size: 0.9rem;
+	}
+	.highlight {
+		margin-top: 1rem;
+		color: #9c6f3f;
+		font-weight: 500;
+	}
+	.mt-2 {
+		margin-top: 0.5rem;
+	}
+	.mt-4 {
+		margin-top: 1rem;
+	}
+	@media (max-width: 768px) {
+		.ceremony-grid {
+			grid-template-columns: 1fr;
+			padding: 0 1rem;
+		}
+		.travel-info {
+			padding: 0 1rem;
+		}
+	}
+</style>

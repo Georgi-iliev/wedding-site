@@ -1,0 +1,194 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Davide & Modupe's Wedding Celebrations" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<nav>
+			<div class="nav-content">
+				<a href="/" class="monogram">D & M</a>
+				<div class="nav-right">
+					<div class="nav-links">
+						<a href="#london" data-en="Engagement" data-it="Fidanzamento">Engagement</a>
+						<a href="#italy" data-en="Wedding" data-it="Matrimonio">Wedding</a>
+						<a href="#travel" data-en="Travel" data-it="Viaggio">Travel</a>
+					</div>
+					<div class="language-toggle">
+						<button class="lang-btn" data-lang="en" title="English">
+							<img src="/flags/gb.svg" alt="UK Flag" width="24" height="24">
+						</button>
+						<button class="lang-btn" data-lang="it" title="Italiano">
+							<img src="/flags/it.svg" alt="Italian Flag" width="24" height="24">
+						</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<slot />
+		<footer>
+			<p data-en="We can't wait to celebrate with you in London and Sicily!" data-it="Non vediamo l'ora di festeggiare con voi a Londra e in Sicilia!">We can't wait to celebrate with you in London and Sicily!</p>
+		</footer>
+	</body>
+</html>
+
+<style>
+	:root {
+		--accent: 236, 228, 217;
+		--text: 51, 51, 51;
+		--background: 255, 255, 255;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	html {
+		font-family: 'Montserrat', sans-serif;
+		background: rgb(var(--background));
+		color: rgb(var(--text));
+		scroll-behavior: smooth;
+	}
+	h1, h2, h3 {
+		font-family: 'Cormorant Garamond', serif;
+		font-weight: 600;
+	}
+	nav {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		background: rgba(255, 255, 255, 0.95);
+		backdrop-filter: blur(5px);
+		z-index: 1000;
+		border-bottom: 1px solid rgba(var(--text), 0.1);
+	}
+	.nav-content {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.nav-right {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+	}
+	.monogram {
+		font-family: 'Cormorant Garamond', serif;
+		font-size: 1.5rem;
+		text-decoration: none;
+		color: rgb(var(--text));
+	}
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+	}
+	.nav-links a {
+		color: rgb(var(--text));
+		text-decoration: none;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		transition: color 0.2s;
+	}
+	.nav-links a:hover {
+		color: rgba(var(--text), 0.7);
+	}
+	.language-toggle {
+		display: flex;
+		gap: 0.5rem;
+	}
+	.lang-btn {
+		background: transparent;
+		border: 1px solid rgba(var(--text), 0.2);
+		padding: 0.25rem;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: all 0.2s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+	}
+	.lang-btn img {
+		width: 24px;
+		height: 24px;
+		border-radius: 2px;
+	}
+	.lang-btn:hover {
+		background: rgba(var(--text), 0.05);
+		transform: translateY(-1px);
+	}
+	.lang-btn.active {
+		background: rgb(var(--accent));
+		border-color: rgba(var(--text), 0.3);
+	}
+	footer {
+		text-align: center;
+		padding: 4rem 1rem;
+		background: rgb(var(--accent));
+		margin-top: 4rem;
+	}
+	@media (max-width: 768px) {
+		.nav-links {
+			display: none;
+		}
+		.nav-right {
+			gap: 1rem;
+		}
+	}
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.lang-btn');
+  const content = document.querySelectorAll('[data-en], [data-it]');
+
+  // Set initial language
+  const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+  setLanguage(currentLang);
+
+  buttons.forEach(button => {
+    if (button.getAttribute('data-lang') === currentLang) {
+      button.classList.add('active');
+    }
+
+    button.addEventListener('click', () => {
+      const lang = button.getAttribute('data-lang');
+      setLanguage(lang);
+      localStorage.setItem('preferredLanguage', lang);
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    });
+  });
+
+  function setLanguage(lang) {
+    content.forEach(element => {
+      const translations = {
+        en: element.getAttribute('data-en'),
+        it: element.getAttribute('data-it')
+      };
+      if (translations[lang]) {
+        element.textContent = translations[lang];
+      }
+    });
+  }
+</script>

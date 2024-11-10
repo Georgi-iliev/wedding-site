@@ -1,0 +1,72 @@
+---
+---
+
+<div class="language-toggle">
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="it">IT</button>
+</div>
+
+<style>
+  .language-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .lang-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
+  }
+  .lang-btn.active {
+    background: rgb(var(--accent));
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.lang-btn');
+  const content = document.querySelectorAll('[data-en], [data-it]');
+
+  // Set initial language
+  const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+  setLanguage(currentLang);
+
+  buttons.forEach(button => {
+    if (button.getAttribute('data-lang') === currentLang) {
+      button.classList.add('active');
+    }
+
+    button.addEventListener('click', () => {
+      const lang = button.getAttribute('data-lang');
+      setLanguage(lang);
+      localStorage.setItem('preferredLanguage', lang);
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    });
+  });
+
+  function setLanguage(lang) {
+    content.forEach(element => {
+      const translations = {
+        en: element.getAttribute('data-en'),
+        it: element.getAttribute('data-it')
+      };
+      if (translations[lang]) {
+        element.textContent = translations[lang];
+      }
+    });
+  }
+</script>
